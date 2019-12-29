@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import controller.Controller;
 import vo.ReservationVO;
 import vo.UserVO;
 import dao.ReservationDAO;
@@ -29,17 +30,16 @@ public class ReservationServiceImpl implements ReservationService{
 		}
 		return instance;
 	}
-
 	ReservationDAO reservDao = ReservationDAOImpl.getInstance();
 	UserDao userDao =UserDaoImpl.getInstance();
-	
+	UserVO userVO = new UserVO();
 	ArrayList<ReservationVO> reservtaionCheckList = reservDao.reservationList();
 	ArrayList<UserVO> tb_user = userDao.selectUserList();
 	//----------------------------------------------------//
 	
 	@Override
-	public  void roomCheckIn(int roomId){
-		String userid=Session.LoginUser.getId();
+	public  void roomCheckIn(int roomId, String id){
+//		String userid=Session.LoginUser.getId();
 		int count=0;
 //		System.out.println("체크인 날짜를\t(ex 20200701) 입력주세요>");
 //		int startDt =Integer.parseInt(s.nextLine());
@@ -83,7 +83,8 @@ public class ReservationServiceImpl implements ReservationService{
 //				
 //		}
 //		System.out.println();
-//			 
+		
+		
 //		//-------------------------------체크인 입력부---------------------------------------//	
 			Scanner s = new Scanner(System.in);
 			System.out.println("체크인 날짜를\t(ex 20200701) 입력주세요>");
@@ -101,11 +102,11 @@ public class ReservationServiceImpl implements ReservationService{
 		     int startDate = Integer.parseInt(checkinday.substring(6,8));
 		     Calendar cal1 = Calendar.getInstance();
 		     cal1.set(startYear, startMonth -1, startDate);
-
+		     
 		//--------------------------------날짜 출력-------------------------------------------//    
-		     ArrayList<Object> alluserList = new ArrayList<>();
-		     alluserList.add(userid);															//현재 접속중인 유져아이디
-		     alluserList.add(roomId);															//선택한 룸아이디
+		     ReservationVO userReservList = new ReservationVO();
+		     userReservList.setUserId(id);														//현재 접속중인 유져아이디
+		     userReservList.setRoomId(roomId);													//선택한 룸아이디
 		     
 //		     SimpleDateFormat format_recentTime = new SimpleDateFormat("yyyyMMdd");				//현재 시간을 예약아이디로 입력부
 //		     Date recentTime = new Date();
@@ -119,11 +120,13 @@ public class ReservationServiceImpl implements ReservationService{
 		         cal1.add(Calendar.DATE, 1);
 		         Integer checkdays =getDateByInteger(cal1.getTime());								//	Calendar의 날짜를 하루씩 증가한다.
 		         if(getDateByInteger(cal1.getTime()) >= checkoutday) 							// 현재 날짜가 종료일자보다 크거나 같을때
-		        	break;
+		        	 break;
 		     }
+		     Controller cont = new Controller();
+		     cont.userLogin(id);
 		    //--------------------------------날짜 출력-------------------------------------------//  
 		}//The end roomCheckIn
-		
+	
 	
 	public static Date conv(int date){
 		Calendar cal1 = Calendar.getInstance();
@@ -155,8 +158,10 @@ public class ReservationServiceImpl implements ReservationService{
 		System.out.println("------------------------------");
 			for(int i =reservtaionCheckList.size() -1; 0<= i; i--){
 				ReservationVO reList =reservtaionCheckList.get(i);
-				System.out.println(i + 1
+				System.out.println(i + 1+ reList.getUserId()
 									 + "\t"
+//									 + reList.getUserId()
+//									 + "\t"
 									 + reList.getReservationId()
 									 + "\t"
 									 + reList.getRoomId() 		

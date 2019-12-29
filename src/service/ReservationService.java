@@ -6,7 +6,7 @@ import vo.UserVO;
 public interface ReservationService {
 
 	
-	void roomCheckIn(int roomId); 		//예약 날짜 조회 및 예약 (
+	void roomCheckIn(int roomId, String id); 		//예약 날짜 조회 및 예약 (
 	
 	void selectReservation();	//예약가능조회
 	

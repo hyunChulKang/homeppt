@@ -18,7 +18,7 @@ public class Hotelroom {
 //		
 HotelServiceImpl roomService = HotelServiceImpl.getInstance();
 	
-	public void roomMain(int a){	//호텔 id를 받아야 함
+	public void roomMain(int a, String id){	//호텔 id를 받아야 함
 		
 		RoomService roomService = RoomServiceImpl.getInstance();//룸서비스 클래스를 불러온다
 		//Reservation service 예약서비스 클래스를 불러온다
@@ -55,8 +55,8 @@ HotelServiceImpl roomService = HotelServiceImpl.getInstance();
 				break;
 			}
 			else if(userInput.equals("예약")){/*reservation service를 roomId을 담아서 보내준다*/
-				reservationService.roomCheckIn(roomId);
-				userInput = "이전";
+				reservationService.roomCheckIn(roomId, id);
+//				userInput = "이전";
 			}else if(userInput.equals("리뷰")){
 			/*review service를 roomId를 담아서 보내준다*/
 			}else{

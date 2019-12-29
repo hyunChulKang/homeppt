@@ -47,7 +47,7 @@ public class HotelServiceImpl implements HotelService {
 	
 
 	@Override
-	public void Search() { //지역 아이디 바탕
+	public void Search(String id) { //지역 아이디 바탕
 //		Hotel hotel = new Hotel();
 		String 광주;
 		System.out.println("지역을 입력하세요");
@@ -68,16 +68,14 @@ public class HotelServiceImpl implements HotelService {
 					 HotelName(i);
 				}
 			}else if(input.equals("이전화면")){
-				new Controller().localMove();
+				new Controller().localMove(id);
 			}
-		}while(!input.equals("서울")  || !input.equals("인천")  || !input.equals("대전") || !input.equals("세종")  
-							  || !input.equals("광주")  || !input.equals("대구")  || !input.equals("울산") 
-							  || !input.equals("부산") || !input.equals("제주"));
+		}while(!input.equals("대전"));
 		
-		getInfo();
+		getInfo(id);
 	}
 	@Override
-	public void getInfo() { //지역 아이디 및 호텔 아이디 바탕
+	public void getInfo(String id) { //지역 아이디 및 호텔 아이디 바탕
 		String input;
 //		int output;
 //		if(!input.equals("이전화면"));
@@ -106,7 +104,7 @@ public class HotelServiceImpl implements HotelService {
 					HotelInfo(i);
 				}		
 //				room.room();
-				room.roomMain(hotelId);
+				room.roomMain(hotelId, id);
 				break;
 			case "유성호텔" :
 				hotelId = 02;
@@ -121,10 +119,10 @@ public class HotelServiceImpl implements HotelService {
 				
 				break;
 			case "이전" :
-				getInfo();
+				getInfo(id);
 				break;
 			}
-			input = "이전화면";
+//			input = "이전화면";
 		
 		}while(!input.equals("이전화면"));
 //		if(input.equals("롯데시티호텔대전")){

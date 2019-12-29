@@ -165,8 +165,9 @@ public class UserServiceImpl implements UserService { //클래스를 생성할�
 			Session.LoginUser = user;
 			System.out.println("로그인 성공 !!");
 			System.out.println(user.getName() + "님 환영합니다.");
-			as.userLogin();
+			as.userLogin(id);
 		}
+	
 	}
 
 	@Override

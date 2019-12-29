@@ -123,11 +123,10 @@ public class Database { //기본적은 데이터를 입력
 		 }
 	 }
 	 
-		
 		public ArrayList<ReservationVO> userReservationlist = new ArrayList<>();
 		{
 			ReservationVO userReservList = new ReservationVO();
-			
+			userReservList.setUserId("admin");
 			userReservList.setCheckin(conv(20191225));
 			userReservList.setCheckout(conv(20200102));
 			userReservList.setPaymethod("현금");

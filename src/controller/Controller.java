@@ -145,7 +145,7 @@ public class Controller {
 		}while(menu != 0);
 	}
 	
-	public void userLogin() { //사용자 로그인화면으로 이동
+	public void userLogin(String id) { //사용자 로그인화면으로 이동
 		int menu;
 		
 		do{
@@ -163,7 +163,7 @@ public class Controller {
 			switch(menu){
 			
 			case 1 : //지역선택하러 가기
-				localMove();
+				localMove(id);
 				break;
 			case 2 : //예약조회
 				reservationService.selectReservation();
@@ -218,7 +218,7 @@ public class Controller {
 	}
 	
 	
-	public void localMove(){
+	public void localMove(String id){
 //		Hotel hotel = new Hotel();
 		int menu;
 		
@@ -234,7 +234,7 @@ public class Controller {
 			
 			switch(menu){
 			case 1 :
-				hotel.Search();
+				hotel.Search(id);
 				break;
 			case 2 :
 				break;
