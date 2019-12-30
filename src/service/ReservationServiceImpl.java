@@ -1,5 +1,6 @@
 package service;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,56 +35,11 @@ public class ReservationServiceImpl implements ReservationService{
 	UserDao userDao =UserDaoImpl.getInstance();
 	UserVO userVO = new UserVO();
 	ArrayList<ReservationVO> reservtaionCheckList = reservDao.reservationList();
-	//----------------------------------------------------s//
+	//----------------------------------------------------//
 	
 	@Override
 	public  void roomCheckIn(int roomId, String userid){
-//		String userid=Session.LoginUser.getId();
 		int count=0;
-//		System.out.println("체크인 날짜를\t(ex 20200701) 입력주세요>");
-//		int startDt =Integer.parseInt(s.nextLine());
-//		Date checkin =ReservationDAOImpl.conv(startDt);
-//		
-//					
-//		System.out.println("체크아웃 날짜를\t(ex 20200701) 입력주세요>");
-//		int endDt =Integer.parseInt(s.nextLine());
-//		Date checkout = ReservationDAOImpl.conv(endDt);
-								
-//		boolean reservCheck2 =reservDao.reservCheck(roomid, checkin, checkout);
-					
-//		if(reservCheck2 == false){				//실패하면 다시 입력하도록 하기 
-//			System.out.println("호텔정보화면으로 가고 싶으면  '호텔' 입력 해주시고 \r 날짜를 다시 설정하려면 '날짜선택'을 입력주세요");
-//			String replay =s.nextLine();
-//			if(replay.equals("호텔")){
-//			hs.getInfo();
-//			}else if (replay.equals("날짜선택"))
-//				roomCheckIn(roomid);
-//		}
-		
-//		SimpleDateFormat format_recentTime1 = new SimpleDateFormat("yyyyMMdd");
-//		int checkinf = Integer.parseInt(format_recentTime1.format(checkin));
-//		
-//		SimpleDateFormat format_recentTime2 = new SimpleDateFormat("yyyyMMdd");
-//		int checkoutf = Integer.parseInt(format_recentTime2.format(checkout));
-//		
-		
-		
-//		System.out.println("결제방식선택하세요 \r\t 현금 \t 카드");
-//		reservationId++;
-		
-//		UserReservationlist.add();
-//		UserReservationlist.add(reservationId);
-//		UserReservationlist.add(roomid);
-//		UserReservationlist.add(checkinf);
-//		UserReservationlist.add(checkoutf);
-		
-//		for(int i =0; i<UserReservationlist.size(); i++){
-//				System.out.print("\t"+UserReservationlist.get(i));
-//				
-//		}
-//		System.out.println();
-		
-		
 //		//-------------------------------체크인 입력부---------------------------------------//	
 			Scanner s = new Scanner(System.in);
 			System.out.println("체크인 날짜를\t(ex 20200701) 입력주세요>");
@@ -187,10 +143,10 @@ public class ReservationServiceImpl implements ReservationService{
 		String paymentMethod = "";
 		int price = reservDao.getRoomPrice(roomid);
 		double prices = (double)price*staydate;
-		
+		DecimalFormat form =new DecimalFormat("###,###");
 		do{
 		System.out.println("------------------------------------------");
-		System.out.println("결제하실 방의 가격은"+prices+"입니다.");
+		System.out.println("결제하실 방의 가격은"+form.format(prices)+"입니다.");
 		System.out.println("1. 결제하기");
 		System.out.println("2. 결제취소");
 		System.out.println("------------------------------------------");
@@ -246,11 +202,12 @@ public class ReservationServiceImpl implements ReservationService{
 			System.out.println("예약리스트에서 취소하실 예약번호를 선택해주세요(ex.예약12번)");
 			System.out.println("유저 화면으로 돌아가시려면 0을 눌러주세요");
 			ans = Integer.parseInt(sc.nextLine());
-			
+			DecimalFormat form =new DecimalFormat("###,###");
+
 			if(ans == 0){break;}
 			if(reserv.get(ans-1).getStatus() == 1){
 				System.out.println("예약이 취소되었습니다.");
-				System.out.println("결제금액 "+reserv.get(ans-1).getReservationPrice()+"을");
+				System.out.println("결제금액 "+form.format(reserv.get(ans-1).getReservationPrice())+"원"+"을");
 				System.out.println("결제하신 방법인 "+reserv.get(ans-1).getPaymethod()+"(으)로 돌려드립니다.");
 				reservDao.cancelReserv(reserv.get(ans-1).getReservationId()); 			//예약상태를 취소로 바꾸는 메소드
 				break;
@@ -281,63 +238,4 @@ public class ReservationServiceImpl implements ReservationService{
 		}while(true);
 		
 	}
-
-	
-
-	@Override
-	public void selectReservation(String userid) {
-		
-		
-		System.out.println("------------------------------");
-		System.out.println("번호\t 아이디\t예약번호\t객실아이디\t예약기간\t\t예약상태");
-		System.out.println("------------------------------");
-			for(int i =reservDao.reservationList().size() -1; 0<= i; i--){
-				ReservationVO reList =reservDao.reservationList().get(i);
-				System.out.println(i + 1+"\t"+ reList.getUserId()
-									 + "\t"
-									 + reList.getReservationId()
-									 + "\t"
-									 + reList.getRoomId() 		
-									 + "\t"
-									 + getDateByInteger(reList.getCheckin())
-									 + "~" 
-									 + getDateByInteger(reList.getCheckout())
-									 +"("
-									 + (reList.getCount()-1)
-									 +"박"
-									 + reList.getCount()
-									 +"일"
-									 +")"
-									 + "\t"
-									 + reList.getStatus()
-									 );
-									 	
-			}
-			System.out.println("-------------------------------------");
-			 Controller cont = new Controller();
-			 searchReserv(userid);
-	
-		
-			
-	}
-
 }
-
-//	@Override
-//	public void cancelReservation(String id) {
-//		public static void reservMain (int roomid, String userid){
-//			
-//			//메소드에 필요한 클래스를 객체로 생성
-//			ReservService reservService = ReservServiceImpl.getInstance();
-//			ReservVO rvo = new ReservVO();
-//			
-//			//날짜 선택하는 메소드 실행 + 결제까지한꺼번에 진행함
-//			rvo = reservService.selectDate(roomid);
-//			
-//			//고객이 결제했을 경우 데이터베이스에 저장
-//			if(rvo.getPaymethod() != ""){
-//				rvo.setRoomId(roomid);
-//				rvo.setUserId(userid);
-//				reservService.addReserv(rvo);
-//			}
-//			

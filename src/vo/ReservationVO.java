@@ -14,15 +14,7 @@ public class ReservationVO {
 	private String request;
 	private String paymethod;
 	private int count;
-	private String requests;
 	
-	
-	public String getRequests() {
-		return requests;
-	}
-	public void setRequests(String requests) {
-		this.requests = requests;
-	}
 	public String getUserId() {
 		return userId;
 	}
