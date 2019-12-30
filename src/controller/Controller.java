@@ -106,9 +106,6 @@ public class Controller {
 			case 1 : //등록이동
 				userService.join();
 				break;
-			case 3: //예약리스트
-				reservationService.selectReservation();
-				break;
 			case 0: //프로그램 종료
 				
 				break;
@@ -145,7 +142,7 @@ public class Controller {
 		}while(menu != 0);
 	}
 	
-	public void userLogin(String id) { //사용자 로그인화면으로 이동
+	public void userLogin(String userid) { //사용자 로그인화면으로 이동
 		int menu;
 		
 		do{
@@ -163,10 +160,10 @@ public class Controller {
 			switch(menu){
 			
 			case 1 : //지역선택하러 가기
-				localMove(id);
+				localMove(userid);
 				break;
 			case 2 : //예약조회
-				reservationService.selectReservation();
+				reservationService.searchReserv(userid);
 				break;
 			case 3 : //마이페이지
 //				userMypage();
@@ -229,7 +226,7 @@ public class Controller {
 		System.out.println("메뉴에 해당하는 번호 입력>");
 		
 		
-		do{
+	
 			menu = Integer.parseInt(s.nextLine());		
 			
 			switch(menu){
@@ -239,10 +236,26 @@ public class Controller {
 			case 2 :
 				break;
 			}
-			menu =2;
-		}while(menu != 2);
+		
 		
 	}
+	
+//	public void reservationseCancal(String id){
+//		Scanner can = new Scanner(System.in);
+//		System.out.println("\t1.예약 취소  \r\t2.메인페이지");
+//		int num=Integer.parseInt(can.nextLine());
+//		
+//		switch(num){
+//		
+//		case 1 :
+//			reservationService.earchReserv(id);
+//			break;
+//		case 2 :
+//			userLogin(id);
+//			break;
+//		}
+//		
+//	}
 }
 	
 	

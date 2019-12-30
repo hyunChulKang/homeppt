@@ -122,8 +122,7 @@ public class HotelServiceImpl implements HotelService {
 				getInfo(id);
 				break;
 			}
-//			input = "이전화면";
-		
+			break;
 		}while(!input.equals("이전화면"));
 //		if(input.equals("롯데시티호텔대전")){
 //

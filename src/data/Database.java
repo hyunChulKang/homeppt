@@ -127,17 +127,77 @@ public class Database { //기본적은 데이터를 입력
 		{
 			ReservationVO userReservList = new ReservationVO();
 			userReservList.setUserId("admin");
-			userReservList.setCheckin(conv(20191225));
+			userReservList.setCheckin(conv(20191223));
 			userReservList.setCheckout(conv(20200102));
 			userReservList.setPaymethod("현금");
-			userReservList.setRequest("없음");
+			userReservList.setRequests("없음");
 			userReservList.setReservationId(2019);
 			userReservList.setReservationPrice(1000000);
-			userReservList.setRoomId(1912);
+			userReservList.setRoomId(1);
 			userReservList.setCount(8);
+			userReservList.setStatus(1);
 			userReservationlist.add(userReservList);
 		}
-		
+//		
+//		{
+//			ReservationVO userReservList = new ReservationVO();
+//			userReservList.setUserId("park");
+//			userReservList.setCheckin(conv(20191225));
+//			userReservList.setCheckout(conv(20200102));
+//			userReservList.setPaymethod("현금");
+//			userReservList.setRequests("없음");
+//			userReservList.setReservationId(2019);
+//			userReservList.setReservationPrice(1000000);
+//			userReservList.setRoomId(1912);
+//			userReservList.setCount(8);
+//			userReservList.setStatus(1);
+//			userReservationlist.add(userReservList);
+//		}
+//		
+//		{
+//			ReservationVO userReservList = new ReservationVO();
+//			userReservList.setUserId("lee");
+//			userReservList.setCheckin(conv(20191225));
+//			userReservList.setCheckout(conv(20200102));
+//			userReservList.setPaymethod("현금");
+//			userReservList.setRequests("없음");
+//			userReservList.setReservationId(2019);
+//			userReservList.setReservationPrice(1000000);
+//			userReservList.setRoomId(1912);
+//			userReservList.setCount(8);
+//			userReservList.setStatus(1);
+//			userReservationlist.add(userReservList);
+//		}
+//		
+//		{
+//			ReservationVO userReservList = new ReservationVO();
+//			userReservList.setUserId("kang");
+//			userReservList.setCheckin(conv(20191225));
+//			userReservList.setCheckout(conv(20200102));
+//			userReservList.setPaymethod("현금");
+//			userReservList.setRequests("없음");
+//			userReservList.setReservationId(2019);
+//			userReservList.setReservationPrice(1000000);
+//			userReservList.setRoomId(1912);
+//			userReservList.setCount(8);
+//			userReservList.setStatus(1);
+//			userReservationlist.add(userReservList);
+//		}
+//
+//		{
+//			ReservationVO userReservList = new ReservationVO();
+//			userReservList.setUserId("min");
+//			userReservList.setCheckin(conv(20191225));
+//			userReservList.setCheckout(conv(20200102));
+//			userReservList.setPaymethod("현금");
+//			userReservList.setRequests("없음");
+//			userReservList.setReservationId(2019);
+//			userReservList.setReservationPrice(1000000);
+//			userReservList.setRoomId(1912);
+//			userReservList.setCount(8);
+//			userReservList.setStatus(1);
+//			userReservationlist.add(userReservList);
+//		}
 			public Date conv(int date){
 				int a = date%100; //일
 				date = date/100;
@@ -151,5 +211,7 @@ public class Database { //기본적은 데이터를 입력
 				Date time = cal.getTime();
 			return time;
 			}
+			
+			
 			
 }

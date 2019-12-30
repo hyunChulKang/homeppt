@@ -1,12 +1,13 @@
 package dao;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 import vo.ReservationVO;
-import vo.UserVO;
 import data.Database;
+import data.RoomDatabase;
 
 public class ReservationDAOImpl implements ReservationDAO {
 	//--------------------------------------------------------//
@@ -24,12 +25,18 @@ public class ReservationDAOImpl implements ReservationDAO {
 	//--------------------------------------------------------//
 	
 	Database database =Database.getInstance();
+	RoomDatabase roodb = RoomDatabase.getInstance();
 	
-	@Override
-	public ReservationVO reservationcheck() {
-//		ReservationVO check12
+	
+	
+public static String printdt(Date date){
 		
-		return null;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		cal.setTime(date);
+		String yyyymmdd = sdf.format(cal.getTime());
+		
+		return yyyymmdd;
 	}
 
 	public void reservationinsert(ReservationVO reservation) {
@@ -79,6 +86,9 @@ public class ReservationDAOImpl implements ReservationDAO {
 //		return time;
 //	}
 
+	
+	
+	
 	
 	//예약하려는 룸아이디를 가져오면 이미 reserv된 리스트를 가져온다. 취소되지 않은 녀석이어야 한다.
 		public ArrayList<ReservationVO> reservedRoom(int roomid){				// status 1- 예약완료 , 2- 예약취소 , 3 - 리뷰가능
@@ -141,7 +151,77 @@ public class ReservationDAOImpl implements ReservationDAO {
 	}
 
 	@Override
+	public void resVOprint (ReservationVO rvo){
+		int hotelid=0;
+		for(int i = 0; i < roodb.tb_room.size(); i++){
+			if(roodb.tb_room.get(i).getRoomId() == rvo.getRoomId()){
+				hotelid = roodb.tb_room.get(i).getHotelId();
+			}
+		}
+		String status = "";
+		if(rvo.getStatus()==1){status = "예약완료/취소가능";}
+		if(rvo.getStatus()==2){status = "예약취소";}
+		if(rvo.getStatus()==3){status = "리뷰작성가능";}
+		
+		System.out.print("\t예약호텔 아이디 : "+hotelid+"\t\t");
+		System.out.println("예약객실 아이디 : "+rvo.getRoomId()+"\t\t");
+		System.out.print("\t체크인 : "+printdt(rvo.getCheckin())+"\t");
+		System.out.println("체크아웃 : "+printdt(rvo.getCheckout())+"\t");
+		System.out.print("\t예약비 : "+rvo.getReservationPrice()+"\t");
+		System.out.println("결제방식 : "+rvo.getPaymethod()+"\t");
+		System.out.println("\t요청사항 : "+rvo.getRequest()+"\t");
+		System.out.println("\t예약상태 : "+status);
+		System.out.println();
+		
+	}
+	
+	
+	
+	@Override
+	public ArrayList<ReservationVO> getUserReserv(String userid) {
+		
+		ArrayList<ReservationVO> tmp = new ArrayList<>();
+		for(int i = 0; i < database.userReservationlist.size(); i++){
+			if(database.userReservationlist.get(i).getUserId().equals(userid)){
+				tmp.add(database.userReservationlist.get(i));
+			}
+		}
+		return tmp;
+	}
+
+	
+	@Override
+	public int getRoomPrice(int roomid) {
+		int price = 0;
+		for (int i = 0; i < roodb.tb_room.size(); i ++){
+			if(roodb.tb_room.get(i).getRoomId() == roomid){
+				price = roodb.tb_room.get(i).getRoomPrice();
+			}
+		}
+		return price;
+	}
+
+		
+	@Override
 	public ArrayList<ReservationVO> selectReservationList() {
 		return database.userReservationlist;
 	}
+
+	@Override
+	public void insertUser(ReservationVO reservation) {
+		database.userReservationlist.add(reservation);
+//		database.tb_user.add(user)
+	}
+	
+	
+
+	@Override
+	public void cancelReserv(int ReservId) {
+		for(int i = 0; i < database.userReservationlist.size(); i++){
+			if(database.userReservationlist.get(i).getReservationId() == ReservId){
+				database.userReservationlist.get(i).setStatus(2);
+			}
+		}
+	}
+
 }

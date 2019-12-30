@@ -7,7 +7,6 @@ public class ReservationVO {
 	private String userId;
 	private int reservationId;
 	private int roomId;
-	private int checkdays;
 	private int reservationPrice;
 	private int status;
 	private Date checkin;
@@ -15,7 +14,15 @@ public class ReservationVO {
 	private String request;
 	private String paymethod;
 	private int count;
+	private String requests;
 	
+	
+	public String getRequests() {
+		return requests;
+	}
+	public void setRequests(String requests) {
+		this.requests = requests;
+	}
 	public String getUserId() {
 		return userId;
 	}
@@ -25,20 +32,14 @@ public class ReservationVO {
 	public int getReservationId() {
 		return reservationId;
 	}
-	public void setReservationId(int reservationId) {
-		this.reservationId = reservationId;
+	public void setReservationId(int reservationId2) {
+		this.reservationId = reservationId2;
 	}
 	public int getRoomId() {
 		return roomId;
 	}
 	public void setRoomId(int roomId) {
 		this.roomId = roomId;
-	}
-	public int getCheckdays() {
-		return checkdays;
-	}
-	public void setCheckdays(int checkdays) {
-		this.checkdays = checkdays;
 	}
 	public int getReservationPrice() {
 		return reservationPrice;

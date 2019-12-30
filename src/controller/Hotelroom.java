@@ -56,7 +56,7 @@ HotelServiceImpl roomService = HotelServiceImpl.getInstance();
 			}
 			else if(userInput.equals("예약")){/*reservation service를 roomId을 담아서 보내준다*/
 				reservationService.roomCheckIn(roomId, id);
-//				userInput = "이전";
+				break;
 			}else if(userInput.equals("리뷰")){
 			/*review service를 roomId를 담아서 보내준다*/
 			}else{
