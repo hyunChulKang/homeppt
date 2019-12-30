@@ -34,7 +34,7 @@ public class ReservationServiceImpl implements ReservationService{
 	UserDao userDao =UserDaoImpl.getInstance();
 	UserVO userVO = new UserVO();
 	ArrayList<ReservationVO> reservtaionCheckList = reservDao.reservationList();
-	//----------------------------------------------------//
+	//----------------------------------------------------s//
 	
 	@Override
 	public  void roomCheckIn(int roomId, String userid){
